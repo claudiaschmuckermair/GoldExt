@@ -1,0 +1,119 @@
+1) open Anaconda Navigator (type it into search field)
+2) Launch cmd.exe Prompt
+
+#type into cmd:
+activate py2
+
+#move to directory containing GoldExt by typing
+cd C:\Users\q183cs\Documents\GitHub\GoldExt
+
+#start GUI by typing
+Python Main.py
+
+#load image (tried .tif, .jpg and .png only .png works)
+#if image is in another format than .png open it in imageJ and use Save As... to convert the images to .png
+(Fiji is here: C:\Users\q183cs\Documents\GitHub\calciumImagingAnalysis\_external_programs\fiji-win64-20151222\Fiji.app\ImageJ-win64.exe)
+
+1) load image (Open Image File)
+2) click "Set Scale Bar" and draw the scale bar (2 seperate mouse clicks)
+3) click "Draw Synaptic Area Ouline" and draw it (seperate mouse clicks)
+4) click "Connect Synaptic Area Endings" to close the Synaptic Area = SDP
+5) click "Mark Small Gold Particles"  and click on all of them, you can Zoom in and out with the mouse wheel and delete a wrong click with "Delete Small"
+6) Save State and Image whenenver you stop
+
+If you have higher localization point densities (300-400 µm-2) use 2D ACF g(r) and/or NND analysis of single SDPs
+If you have low localization point densities (100 µm-2) use 2D ACF population-wise comparison g(r) values against corresponding randomization data
+
+
+INTERPRETATION:
+
+NND
+- mean NND larger than random distribution = uniform pattern
+- mean NND smaller than random distribution = clustered pattern
+
+2D ACF
+- mean g(r) of ACF smaller than random distribution = uniform pattern
+- mean g(r) of ACF larger than random distribution = clustered pattern 
+
+CLUSTER ANALYSIS
+
+DBSCAN(DB) performs best for 30 and 60 µm-2 cluster densities!
+
+/ minimum number of points per cluster = 3
+/ maximal distance between two localization points (to be considered in the same cluster) e = 50?nm
+/ for BC:  ‘extra space’ = 200?nm (adds 200nm to SDP, thereby increasing performance)
+
+
+
+
+
+#close Python2 environment by typing in cmd:
+deactivate
+
+
+
+
+Data Analysis BACKGROUND KNOWLEDGE: 
+
+A) WHICH ANALYSIS IS BEST TO DISTINGUISH CLUSTERS FROM RANDOM PATTERNS
+
+- ACF and NND outperformed the others, resulting in an error rate of 0% at all localization point densities above 300 µm-2 in case of the multiple-cluster models.
+  Their performance was also remarkably good for the T- and ring-shaped patterns above the localization point density of 400 µm-2.
+
+- ACF 2D Population-wise comparisons are more powerful in detecting differences at low localization point densities (100 µm-2)
+
+Details (skip if not interested):
+
+Error rates calculated from 20 models, which are individually compared to 200 random distributions.
+Models with their computed parameter falling <2.5% and >97.5% of that of the random distributions were considered ‘significantly’ different from random.
+The error rates are plotted as a function of localization densities and are shown for the 5 different measures on the 4 different clustered patterns 
+(Figure 1e-i, Miklos Szoboszlay, Tekla Kirizs & Zoltan Nusser et al., Sci Reports 2017): 
+
+1)' 2D ACF': 2D autocorrelation function g(r)
+2) 'NND': nearest neighbor distances
+3) 'all to all': distances between all gold particels
+4) 'centroid': distance of each point from the center of mass of the localization points
+5) 'closest edge': distance of each point from the closest edge of the structure delineating polygon (SDP)
+
+From these five measures, ACF and NND outperformed the others, resulting in an error rate of 0% at all localization point densities above 300 µm-2 in case of the multiple-cluster models.
+Their performance was also remarkably good for the T- and ring-shaped patterns above the localization point density of 400 µm-2.
+These data, taken together, demonstrate that both ACF and NND measures are ideal for distinguishing between random and clustered patterns at the level of individual SDP.
+
+BUT:
+
+# in large rectangular areas: 
+/ g(r) value of 1 indicates randomly distributed points --> only true for large rectangular! (Miklos Szoboszlay, Tekla Kirizs & Zoltan Nusser et al., Sci Reports 2017)
+/ g(r) values smaller than 1 correspond to uniform patterns
+/ g(r) values?larger than?1 indicate clustered patterns
+# as we dont have rectangular synapses --> compare the mean g(r) value of the simulated or experimental data to that of their corresponding randomizations
+# to assess statistical significance!
+
+# ACF 2D Population-wise comparisons are more powerful in detecting differences at low localization point densities (100 µm-2) 
+# Kruskal-Wallis test followed by Mann-Whitney U post hoc test with Bonferroni adjustment
+
+
+B) WHICH ANALYSIS IS BEST TO DISTINGUISH UNIFORM FROM RANDOM PATTERNS
+
+- both NND and ACF perform well for densities from 100-800 µm-2 
+(see Figure 2: Miklos Szoboszlay, Tekla Kirizs & Zoltan Nusser et al., Sci Reports 2017)
+
+C) After analyzing the localization point distribution patterns based on the methods above, INVESTIGATE IF CLUSTERS COULD BE IDENTIFIED OR NOT
+4 methods tested:
+
+1) DBSCAN (DB)
+2) affinity propagation (AP)
+3) mean shift (MS)
+4) Bayesian clustering (BC)
+
+user-defined parameters derived from localization point distribution patterns!
+
+For comparison of multiple-cluster models, we calculated the adjusted Rand score (ARS)
+ARS computes similarity measures between two clusterings element-wise. 
+ARS values close to 0 indicate random cluster assignments, whereas an ARS value 1.0 indicates identical cluster assignments.
+
+DBSCAN(DB) performs best for 30 and 60 µm-2 cluster densities at localization point density of 200-650 µm-2 (200 µm-2 worked best)
+
+
+ 
+
+

@@ -633,6 +633,8 @@ class GoldExtMainGui(QtGui.QMainWindow, Ui_MainWindow):
 
         # for spatial autocorrelation on random samples
         maskSize = DistanceCalculations.getSynapticAreaOutlineBorders(self.synapticAreaOutlinePoints)
+        
+        print(openedFilename[0:-4] + '_random.pdf')
 
         with PdfPages(openedFilename[0:-4] + '_random.pdf') as pdf:
             for i in range(0, self.randomSampleSpinBox.value()):
