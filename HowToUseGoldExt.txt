@@ -21,6 +21,7 @@ Python Main.py
 5) click "Mark Small Gold Particles"  and click on all of them, you can Zoom in and out with the mouse wheel and delete a wrong click with "Delete Small"
 6) Save State and Image whenenver you stop
 
+
 If you have higher localization point densities (300-400 µm-2) use 2D ACF g(r) and/or NND analysis of single SDPs
 If you have low localization point densities (100 µm-2) use 2D ACF population-wise comparison g(r) values against corresponding randomization data
 
