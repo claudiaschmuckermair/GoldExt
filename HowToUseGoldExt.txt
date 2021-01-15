@@ -1,13 +1,11 @@
 1) open Anaconda Navigator (type it into search field)
-2) Launch cmd.exe Prompt
-
-#type into cmd:
-activate py2
+2) Go to Applications 'py2'
+3) Launch cmd.exe Prompt
 
 #move to directory containing GoldExt by typing
 cd C:\Users\q183cs\Documents\GitHub\GoldExt
 
-#start GUI by typing
+#start GUI by typing6
 Python Main.py
 
 #load image (tried .tif, .jpg and .png only .png works)
@@ -21,10 +19,22 @@ Python Main.py
 5) click "Mark Small Gold Particles"  and click on all of them, you can Zoom in and out with the mouse wheel and delete a wrong click with "Delete Small"
 6) Save State and Image whenenver you stop
 
+Under 'Measure Selection'
+- Distance measurements: Click Generate (with 2D ACF) --> generates random data + experimental data --> distance_measurmetns.xslx file holds NND, all-to-all,centroid and closest edge of experimental data + all random data
+  pdf holds plots of all randomly generated datasets (plotting the localization of random gold particles + NND cumulative probability distribution + All distances
+  2D_ACF.xlsx holds radius (nm) experimental data and 2D_ACF values for the randomly generated datasets
+
+e.g. 84453_H3_x53
+15nm goldparticles (pan-AMPA): 57
+active zone (AZ) area: 0.022 um2
+Total area: 0.285 um2 (whole pic)
+--> localization point densitiy approx 200 / um2 
 
 If you have higher localization point densities (300-400 µm-2) use 2D ACF g(r) and/or NND analysis of single SDPs
 If you have low localization point densities (100 µm-2) use 2D ACF population-wise comparison g(r) values against corresponding randomization data
 
+--> NND analysis should be fine: mean NND (experimental data)  = 0.011486102
+                                 mean NND (50 random datasets) = 0.014202022
 
 INTERPRETATION:
 
@@ -32,9 +42,20 @@ NND
 - mean NND larger than random distribution = uniform pattern
 - mean NND smaller than random distribution = clustered pattern
 
+--> AMPAR distribution in AZ of 84453_H3_x53 is clustered
+
+Check 2D ACF to verify:
+mean g(r) (experimental data)  = 0.893524515
+mean g(r) (50 random datasets) = 0.951204728
+
 2D ACF
 - mean g(r) of ACF smaller than random distribution = uniform pattern
 - mean g(r) of ACF larger than random distribution = clustered pattern 
+
+--> AMPAR distribution in AZ of 84453_H3_x53 is uniform 
+
+--> thats why one synapse is not enough!
+
 
 CLUSTER ANALYSIS
 
